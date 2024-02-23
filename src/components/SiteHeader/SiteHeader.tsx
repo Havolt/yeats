@@ -1,5 +1,5 @@
 import React from 'react'
-import "./SiteHeader.css"
+import "./SiteHeader.scss"
 
 type Props = {}
 
