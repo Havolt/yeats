@@ -1,4 +1,3 @@
-import React from 'react'
 import "./SiteHeader.scss"
 
 type Props = {}
