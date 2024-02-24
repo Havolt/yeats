@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 
 import SiteHeader from './components/SiteHeader/SiteHeader'
 
