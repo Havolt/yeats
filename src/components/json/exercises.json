@@ -1,4 +1,11 @@
 {
+    "groups": {
+        "shapes": true,
+        "threeShapes": true,
+        "lineTypes": true,
+        "drawingPrompts": true,
+        "gestureDescriptions": true
+    },
     "shapes": [
         "circle",
         "square",
