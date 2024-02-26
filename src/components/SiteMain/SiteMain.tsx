@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import ExerciseList from '../ExerciseList/ExerciseList'
 
-import EXERCISES from '../json/exercises.json'
+import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
 type Props = {}
