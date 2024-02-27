@@ -1,25 +1,16 @@
 import { useState } from 'react'
 
+// components
 import ExerciseList from '../ExerciseList/ExerciseList'
-
+// types
+import { ExerciseGroups} from '../../types/componentTypes';
+// extra
 import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
+
+
 type Props = {}
-
-type Exercise = {
-  name: string,
-  active: boolean
-}
-
-type ExerciseGroups = {
-  shapes: Exercise
-  threeShapes: Exercise
-  lineTypes: Exercise
-  drawingPrompts: Exercise
-  gestureDescriptions: Exercise
-  [key: string]: Exercise
-}
 
 function SiteMain({}: Props) {
 

@@ -1,26 +1,9 @@
 import './ExerciseList.scss'
 
-type Exercise = {
-  name: string,
-  active: boolean
-}
-
-type ExerciseGroups = {
-  shapes: Exercise
-  threeShapes: Exercise
-  lineTypes: Exercise
-  drawingPrompts: Exercise
-  gestureDescriptions: Exercise
-  [key: string]: Exercise
-}
-
-type Props = {
-    exerciseGroups: ExerciseGroups;
-    updateExerciseGroup: Function;
-}
+import { ExerciseListProps } from '../../types/componentTypes';
 
 
-export default function ExerciseList({exerciseGroups, updateExerciseGroup}: Props) {
+export default function ExerciseList({exerciseGroups, updateExerciseGroup}: ExerciseListProps) {
   return (
     <>
       <h3>What drawing exercises would you like to do today?</h3>
