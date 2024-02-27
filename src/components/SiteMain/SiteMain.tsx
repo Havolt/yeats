@@ -15,6 +15,7 @@ type Props = {}
 function SiteMain({}: Props) {
 
   const [exerciseList, setExerciseList] = useState(EXERCISES.groups)
+  const [exerciseInProgress, setExerciseInProgress] = useState(false);
 
   const updateExerciseGroup = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
@@ -28,10 +29,21 @@ function SiteMain({}: Props) {
     })
   }
 
+  const start = (): void => {
+    setExerciseInProgress(true)
+  }
+
+  const exerciseSetup = <div className='site-main__setup'>
+    <ExerciseList exerciseGroups={exerciseList} updateExerciseGroup={updateExerciseGroup} />
+    <button onClick={start}>Start Exercises</button>
+  </div>
+
+  const exerciseMain = <div>Started!</div>
+
 
   return (
     <div className="site-main">
-      <ExerciseList exerciseGroups={exerciseList} updateExerciseGroup={updateExerciseGroup} />
+      {exerciseInProgress ? exerciseMain : exerciseSetup}
     </div>
   )
 }
