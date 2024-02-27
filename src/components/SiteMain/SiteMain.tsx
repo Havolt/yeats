@@ -7,15 +7,19 @@ import './SiteMain.scss'
 
 type Props = {}
 
-type ExerciseGroups = {
-  shapes: boolean
-  threeShapes: boolean
-  lineTypes: boolean
-  drawingPrompts: boolean
-  gestureDescriptions: boolean
-  [key: string]: boolean
+type Exercise = {
+  name: string,
+  active: boolean
 }
 
+type ExerciseGroups = {
+  shapes: Exercise
+  threeShapes: Exercise
+  lineTypes: Exercise
+  drawingPrompts: Exercise
+  gestureDescriptions: Exercise
+  [key: string]: Exercise
+}
 
 function SiteMain({}: Props) {
 
@@ -23,7 +27,13 @@ function SiteMain({}: Props) {
 
   const updateExerciseGroup = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
-      return { ...prevExerciseList, [exercise]: !prevExerciseList[exercise] }
+      return { 
+        ...prevExerciseList, 
+        [exercise]: {
+          ...prevExerciseList[exercise],  
+          active: !prevExerciseList[exercise].active 
+        }
+      }
     })
   }
 

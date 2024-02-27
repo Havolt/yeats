@@ -1,10 +1,10 @@
 {
     "groups": {
-        "shapes": true,
-        "threeShapes": true,
-        "lineTypes": true,
-        "drawingPrompts": true,
-        "gestureDescriptions": true
+        "shapes": { "name": "2D Shapes", "active": true},
+        "threeShapes": { "name": "3D Shapes", "active": true},
+        "lineTypes": { "name": "Lines", "active": true},
+        "drawingPrompts": { "name": "Drawing Prompts", "active": true},
+        "gestureDescriptions": { "name": "Gestures", "active": true}
     },
     "shapes": [
         "circle",
