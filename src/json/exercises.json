@@ -1,10 +1,10 @@
 {
     "groups": {
-        "shapes": { "name": "2D Shapes", "active": true},
-        "threeShapes": { "name": "3D Shapes", "active": true},
-        "lineTypes": { "name": "Lines", "active": true},
-        "drawingPrompts": { "name": "Drawing Prompts", "active": true},
-        "gestureDescriptions": { "name": "Gestures", "active": true}
+        "shapes": { "name": "2D Shapes", "active": true, "completed": false},
+        "threeShapes": { "name": "3D Shapes", "active": true, "completed": false},
+        "lineTypes": { "name": "Lines", "active": true, "completed": false},
+        "drawingPrompts": { "name": "Drawing Prompts", "active": true, "completed": false},
+        "gestureDescriptions": { "name": "Gestures", "active": true, "completed": false}
     },
     "shapes": [
         "circle",

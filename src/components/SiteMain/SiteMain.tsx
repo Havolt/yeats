@@ -9,15 +9,15 @@ import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
 
-
 type Props = {}
 
 function SiteMain({}: Props) {
 
   const [exerciseList, setExerciseList] = useState(EXERCISES.groups)
-  const [exerciseInProgress, setExerciseInProgress] = useState(false);
+  const [exerciseInProgress, setExerciseInProgress] = useState(false)
+  const [currentExercise, setCurrentExercise] = useState('')
 
-  const updateExerciseGroup = (exercise: string): void => {
+  const updateActiveExercises = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
       return { 
         ...prevExerciseList, 
@@ -33,12 +33,19 @@ function SiteMain({}: Props) {
     setExerciseInProgress(true)
   }
 
+  const buildCurrentExercise = () => {
+
+  }
+
   const exerciseSetup = <div className='site-main__setup'>
-    <ExerciseList exerciseGroups={exerciseList} updateExerciseGroup={updateExerciseGroup} />
+    <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
     <button onClick={start}>Start Exercises</button>
   </div>
 
-  const exerciseMain = <div>Started!</div>
+  const exerciseMain = <div>
+    <h2>Current Excercise</h2>
+    <h3>{currentExercise}</h3>
+  </div>
 
 
   return (

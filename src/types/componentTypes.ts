@@ -1,6 +1,7 @@
 type Exercise = {
     name: string;
     active: boolean;
+    completed: boolean;
 };
   
 export type ExerciseGroups = {
@@ -14,6 +15,6 @@ export type ExerciseGroups = {
   
 export type ExerciseListProps = {
     exerciseGroups: ExerciseGroups;
-    updateExerciseGroup: (exercise: string) => void;
+    updateActiveExercises: (exercise: string) => void;
 };
   
