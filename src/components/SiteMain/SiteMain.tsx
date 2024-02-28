@@ -3,17 +3,18 @@ import { useState } from 'react'
 // components
 import ExerciseList from '../ExerciseList/ExerciseList'
 // types
-import { ExerciseGroups} from '../../types/componentTypes';
+import { ExerciseGroups, ExerciseJson} from '../../types/componentTypes';
 // extra
 import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
+const exercisesJson: ExerciseJson = EXERCISES.exercises
 
 type Props = {}
 
 function SiteMain({}: Props) {
 
-  const [exerciseList, setExerciseList] = useState(EXERCISES.groups)
+  const [exerciseList, setExerciseList] = useState<ExerciseGroups>(EXERCISES.groups)
   const [exerciseInProgress, setExerciseInProgress] = useState(false)
   const [currentExercise, setCurrentExercise] = useState('')
 
@@ -30,12 +31,20 @@ function SiteMain({}: Props) {
   }
 
   const start = (): void => {
+    buildCurrentExercise()
     setExerciseInProgress(true)
   }
 
   const buildCurrentExercise = () => {
+    Object.keys(exerciseList).forEach((key: string) => {
+      // todo: add a breaker when it matches the first one
+      if (exerciseList[key] && !exerciseList[key].completed && +exercisesJson[key].length > 0) {
+        setCurrentExercise(() => `${exercisesJson[key][0]}`);
+      }
+    });
+  };
 
-  }
+  
 
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
