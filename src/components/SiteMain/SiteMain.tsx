@@ -36,12 +36,12 @@ function SiteMain({}: Props) {
   }
 
   const buildCurrentExercise = () => {
-    Object.keys(exerciseList).forEach((key: string) => {
-      // todo: add a breaker when it matches the first one
-      if (exerciseList[key] && !exerciseList[key].completed && +exercisesJson[key].length > 0) {
-        setCurrentExercise(() => `${exercisesJson[key][0]}`);
+    for(let exerciseKey of Object.keys(exerciseList)) {
+      if (exerciseList[exerciseKey] && !exerciseList[exerciseKey].completed && +exercisesJson[exerciseKey].length > 0) {
+        setCurrentExercise(() => `${exercisesJson[exerciseKey][0]}`);
+        break;
       }
-    });
+    }
   };
 
   
