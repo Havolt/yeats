@@ -17,7 +17,8 @@ function SiteMain({}: Props) {
   const [exerciseList, setExerciseList] = useState<ExerciseGroups>(EXERCISES.groups)
   const [exerciseInProgress, setExerciseInProgress] = useState(false)
   const [currentExercise, setCurrentExercise] = useState('')
-  const [showExerciseDescription, setShowExerciseDescription] = useState('')
+  const [showExerciseDescription, setShowExerciseDescription] = useState(false)
+  const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(0)
 
   const updateActiveExercises = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
@@ -44,6 +45,7 @@ function SiteMain({}: Props) {
         const addExtraText = exerciseKey === 'shapes' || exerciseKey === 'threeShapes' || exerciseKey === 'lineTypes'
         setShowExerciseDescription(addExtraText)
         setCurrentExercise(() => `${exercisesJson[exerciseKey][0]}`)
+        setExerciseTimeRemaining(exerciseList[exerciseKey].time)
         break;
       }
     }
@@ -60,6 +62,7 @@ function SiteMain({}: Props) {
     <h2>Current Excercise</h2>
     { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
     <h3>{currentExercise}</h3>
+    <h4>Time Remaining: { exerciseTimeRemaining }</h4>
   </div>
 
 

@@ -1,8 +1,9 @@
 type Exercise = {
     name: string
     active: boolean
-    completed: boolean
-    [key: string]: string | boolean
+    completed: boolean,
+    time: number,
+    [key: string]: string | boolean | number
 }
   
 export type ExerciseGroups = {
