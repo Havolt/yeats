@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // components
 import ExerciseList from '../ExerciseList/ExerciseList'
@@ -19,6 +19,25 @@ function SiteMain({}: Props) {
   const [currentExercise, setCurrentExercise] = useState('')
   const [showExerciseDescription, setShowExerciseDescription] = useState(false)
   const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(0)
+
+  let exerciseTimeTimeout: ReturnType<typeof setTimeout>
+
+
+  useEffect(() => {
+    if(exerciseTimeRemaining > 0) {
+      exerciseTimeTimeout = setTimeout(() => {
+        setExerciseTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 1)
+      }, 1000)
+    } else {
+      clearTimeout(exerciseTimeTimeout)
+    }
+  
+    return () => {
+      clearTimeout(exerciseTimeTimeout)
+    }
+  }, [exerciseTimeRemaining])
+  
+
 
   const updateActiveExercises = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
