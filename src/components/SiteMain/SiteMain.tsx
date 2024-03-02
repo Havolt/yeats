@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 // components
 import ExerciseList from '../ExerciseList/ExerciseList'
 // types
-import { ExerciseGroups, ExerciseJson} from '../../types/componentTypes';
+import { ExerciseGroups, ExerciseJson, CurrentExercise} from '../../types/componentTypes';
 // extra
 import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
@@ -16,7 +16,7 @@ function SiteMain({}: Props) {
 
   const [exerciseList, setExerciseList] = useState<ExerciseGroups>(EXERCISES.groups)
   const [exerciseInProgress, setExerciseInProgress] = useState(false)
-  const [currentExercise, setCurrentExercise] = useState('')
+  const [currentExercise, setCurrentExercise] = useState<CurrentExercise>({key: '', text: ''})
   const [showExerciseDescription, setShowExerciseDescription] = useState(false)
   const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(-1)
   const [breakInProgress, setBreakInProgress] = useState(false)
@@ -31,8 +31,21 @@ function SiteMain({}: Props) {
       }, 1000)
     } else if(exerciseTimeRemaining === 0) {
       clearTimeout(exerciseTimeTimeout)
-      setBreakInProgress(true)
-      setExerciseTimeRemaining(30)
+      if(!breakInProgress) {
+        setExerciseList((prevState) => {
+          return {
+            ...prevState,
+            [currentExercise.key] : {
+              ...prevState[currentExercise.key],
+              completed: true,
+            }
+          }
+        })
+        setExerciseTimeRemaining(30)
+      } else {
+        buildCurrentExercise();
+      }
+      setBreakInProgress((prevState) => !prevState)
     }
   
     return () => {
@@ -66,7 +79,12 @@ function SiteMain({}: Props) {
       if (exercisesExistAndIncomplete) {
         const addExtraText = exerciseKey === 'shapes' || exerciseKey === 'threeShapes' || exerciseKey === 'lineTypes'
         setShowExerciseDescription(addExtraText)
-        setCurrentExercise(() => `${exercisesJson[exerciseKey][0]}`)
+        setCurrentExercise(() => {
+          return {
+            key: exerciseKey,
+            text: `${exercisesJson[exerciseKey][0]}`
+          }
+        })
         setExerciseTimeRemaining(exerciseList[exerciseKey].time)
         break;
       }
@@ -85,7 +103,7 @@ function SiteMain({}: Props) {
       <>
         <h2>Current Excercise</h2>
         { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
-        <h3>{currentExercise}</h3>
+        <h3>{currentExercise.text}</h3>
       </>
     } 
     { breakInProgress && 

@@ -5,6 +5,11 @@ type Exercise = {
     time: number,
     [key: string]: string | boolean | number
 }
+
+export type CurrentExercise = {
+    key: string,
+    text: string
+}
   
 export type ExerciseGroups = {
     shapes: Exercise
