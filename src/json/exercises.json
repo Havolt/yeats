@@ -1,6 +1,6 @@
 {
     "groups": {
-        "shapes": { "name": "2D Shapes", "active": true, "completed": false, "time": 180},
+        "shapes": { "name": "2D Shapes", "active": true, "completed": false, "time": 10},
         "threeShapes": { "name": "3D Shapes", "active": true, "completed": false, "time": 180},
         "lineTypes": { "name": "Lines", "active": true, "completed": false, "time": 180},
         "drawingPrompts": { "name": "Drawing Prompts", "active": true, "completed": false, "time": 300},

@@ -18,7 +18,8 @@ function SiteMain({}: Props) {
   const [exerciseInProgress, setExerciseInProgress] = useState(false)
   const [currentExercise, setCurrentExercise] = useState('')
   const [showExerciseDescription, setShowExerciseDescription] = useState(false)
-  const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(0)
+  const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(-1)
+  const [breakInProgress, setBreakInProgress] = useState(false)
 
   let exerciseTimeTimeout: ReturnType<typeof setTimeout>
 
@@ -28,8 +29,10 @@ function SiteMain({}: Props) {
       exerciseTimeTimeout = setTimeout(() => {
         setExerciseTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 1)
       }, 1000)
-    } else {
+    } else if(exerciseTimeRemaining === 0) {
       clearTimeout(exerciseTimeTimeout)
+      setBreakInProgress(true)
+      setExerciseTimeRemaining(30)
     }
   
     return () => {
@@ -78,9 +81,18 @@ function SiteMain({}: Props) {
   </div>
 
   const exerciseMain = <div>
-    <h2>Current Excercise</h2>
-    { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
-    <h3>{currentExercise}</h3>
+    { !breakInProgress && 
+      <>
+        <h2>Current Excercise</h2>
+        { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
+        <h3>{currentExercise}</h3>
+      </>
+    } 
+    { breakInProgress && 
+      <>
+        <h2>Break Time</h2>
+      </>
+    }
     <h4>Time Remaining: { exerciseTimeRemaining }</h4>
   </div>
 
