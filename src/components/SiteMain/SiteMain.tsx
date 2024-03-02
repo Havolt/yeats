@@ -23,15 +23,15 @@ function SiteMain({}: Props) {
 
   let exerciseTimeTimeout: ReturnType<typeof setTimeout>
 
-
+  // Controls the timer
   useEffect(() => {
-    if(exerciseTimeRemaining > 0) {
+    if(exerciseTimeRemaining > 0) { // Step timer down a second
       exerciseTimeTimeout = setTimeout(() => {
         setExerciseTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 1)
       }, 1000)
-    } else if(exerciseTimeRemaining === 0) {
+    } else if(exerciseTimeRemaining === 0) { // Handle logic for when a timer reaches zero
       clearTimeout(exerciseTimeTimeout)
-      if(!breakInProgress) {
+      if(!breakInProgress) { // Mark the current exercise as complete and set break timer
         setExerciseList((prevState) => {
           return {
             ...prevState,
@@ -42,7 +42,7 @@ function SiteMain({}: Props) {
           }
         })
         setExerciseTimeRemaining(30)
-      } else {
+      } else { // Build the next exercise
         buildCurrentExercise();
       }
       setBreakInProgress((prevState) => !prevState)
@@ -72,7 +72,7 @@ function SiteMain({}: Props) {
     setExerciseInProgress(true)
   }
 
-  const buildCurrentExercise = () => {
+  const buildCurrentExercise = () => { // Build out the current exercise based on the first one not set as completed
     for(let exerciseKey of Object.keys(exerciseList)) {
       const exercisesExistAndIncomplete = exerciseList[exerciseKey] && !exerciseList[exerciseKey].completed && +exercisesJson[exerciseKey].length > 0
 
@@ -93,11 +93,13 @@ function SiteMain({}: Props) {
 
   
 
+  // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
     <button onClick={start}>Start Exercises</button>
   </div>
 
+  // Exercise elements
   const exerciseMain = <div>
     { !breakInProgress && 
       <>
