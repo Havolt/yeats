@@ -52,8 +52,13 @@ function SiteMain({}: Props) {
       clearTimeout(exerciseTimeTimeout)
     }
   }, [exerciseTimeRemaining])
-  
 
+  const getExercisesIsSelected = () => {
+    for(let exerciseKey of Object.keys(exerciseList)) {
+      if(exerciseList[exerciseKey].active) { return true }
+    }
+    return false
+  }
 
   const updateActiveExercises = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
@@ -73,6 +78,7 @@ function SiteMain({}: Props) {
   }
 
   const buildCurrentExercise = () => { // Build out the current exercise based on the first one not set as completed
+    if(!getExercisesIsSelected()) { return }
     for(let exerciseKey of Object.keys(exerciseList)) {
       const exercisesActiveAndIncomplete = exerciseList[exerciseKey] &&
        exerciseList[exerciseKey].active &&
@@ -99,7 +105,7 @@ function SiteMain({}: Props) {
   // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
-    <button onClick={start}>Start Exercises</button>
+    <button disabled={!getExercisesIsSelected()} onClick={start} type="submit">Start Exercises</button>
   </div>
 
   // Exercise elements
