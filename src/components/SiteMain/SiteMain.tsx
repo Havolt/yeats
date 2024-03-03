@@ -74,9 +74,12 @@ function SiteMain({}: Props) {
 
   const buildCurrentExercise = () => { // Build out the current exercise based on the first one not set as completed
     for(let exerciseKey of Object.keys(exerciseList)) {
-      const exercisesExistAndIncomplete = exerciseList[exerciseKey] && !exerciseList[exerciseKey].completed && +exercisesJson[exerciseKey].length > 0
+      const exercisesActiveAndIncomplete = exerciseList[exerciseKey] &&
+       exerciseList[exerciseKey].active &&
+       !exerciseList[exerciseKey].completed && 
+       +exercisesJson[exerciseKey].length > 0
 
-      if (exercisesExistAndIncomplete) {
+      if (exercisesActiveAndIncomplete) {
         const addExtraText = exerciseKey === 'shapes' || exerciseKey === 'threeShapes' || exerciseKey === 'lineTypes'
         setShowExerciseDescription(addExtraText)
         setCurrentExercise(() => {
