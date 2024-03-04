@@ -5,8 +5,10 @@ type Props = {}
 function Header({}: Props) {
   return (
     <header className="site-header">
-      <h1>Yeats Art Class</h1>
-      <span>One step every day</span>
+      <div className="site-header__content">
+        <h1>Yeats Art Class</h1>
+        <span>One step every day</span>
+      </div>
     </header>
   )
 }

@@ -43,7 +43,7 @@ function SiteMain({}: Props) {
         })
         setExerciseTimeRemaining(30)
       } else { // Build the next exercise
-        buildCurrentExercise();
+        buildCurrentExercise()
       }
       setBreakInProgress((prevState) => !prevState)
     }
