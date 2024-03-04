@@ -9,6 +9,7 @@ import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
 const exercisesJson: ExerciseJson = EXERCISES.exercises
+const BREAK_TIME_AMOUNT = 30;
 
 type Props = {}
 
@@ -41,7 +42,7 @@ function SiteMain({}: Props) {
             }
           }
         })
-        setExerciseTimeRemaining(30)
+        setExerciseTimeRemaining(BREAK_TIME_AMOUNT)
       } else { // Build the next exercise
         buildCurrentExercise()
       }
@@ -53,19 +54,20 @@ function SiteMain({}: Props) {
     }
   }, [exerciseTimeRemaining])
 
-  const getExercisesIsSelected = () => {
+  const hasSelectedExercises = () => {
     for(let exerciseKey of Object.keys(exerciseList)) {
       if(exerciseList[exerciseKey].active) { return true }
     }
     return false
   }
 
+  // Set the current active exercise
   const updateActiveExercises = (exercise: string): void => {
     setExerciseList((prevExerciseList: ExerciseGroups) => {
-      return { 
-        ...prevExerciseList, 
+      return {
+        ...prevExerciseList,
         [exercise]: {
-          ...prevExerciseList[exercise],  
+          ...prevExerciseList[exercise],
           active: !prevExerciseList[exercise].active 
         }
       }
@@ -78,11 +80,11 @@ function SiteMain({}: Props) {
   }
 
   const buildCurrentExercise = () => { // Build out the current exercise based on the first one not set as completed
-    if(!getExercisesIsSelected()) { return }
+    if(!hasSelectedExercises()) { return }
     for(let exerciseKey of Object.keys(exerciseList)) {
       const exercisesActiveAndIncomplete = exerciseList[exerciseKey] &&
        exerciseList[exerciseKey].active &&
-       !exerciseList[exerciseKey].completed && 
+       !exerciseList[exerciseKey].completed &&
        +exercisesJson[exerciseKey].length > 0
 
       if (exercisesActiveAndIncomplete) {
@@ -105,7 +107,7 @@ function SiteMain({}: Props) {
   // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
-    <button disabled={!getExercisesIsSelected()} onClick={start} type="submit">Start Exercises</button>
+    <button disabled={!hasSelectedExercises ()} onClick={start} type="submit">Start Exercises</button>
   </div>
 
   // Exercise elements
