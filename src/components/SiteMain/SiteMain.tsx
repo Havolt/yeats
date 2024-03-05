@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 // components
 import ExerciseList from '../ExerciseList/ExerciseList'
+import TimeBar from '../TimeBar/TimeBar'
 // types
 import { ExerciseGroups, ExerciseJson, CurrentExercise} from '../../types/componentTypes';
 // extra
@@ -116,6 +117,7 @@ function SiteMain({}: Props) {
       <>
         <h2>Current Excercise</h2>
         { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
+        <TimeBar progress={0} />
         <h3>{currentExercise.text}</h3>
       </>
     } 
