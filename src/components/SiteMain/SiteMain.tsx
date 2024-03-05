@@ -103,6 +103,14 @@ function SiteMain({}: Props) {
     }
   };
 
+  const timeRemaingPercentage = () => {
+    if(exerciseList[currentExercise.key]) {
+      return Math.floor((exerciseTimeRemaining / exerciseList[currentExercise.key].time * 100))
+    } else {
+      return 0
+    }
+  }
+
   
 
   // Initial setup elements
@@ -117,7 +125,7 @@ function SiteMain({}: Props) {
       <>
         <h2>Current Excercise</h2>
         { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
-        <TimeBar progress={0} />
+        <TimeBar progress={timeRemaingPercentage()} />
         <h3>{currentExercise.text}</h3>
       </>
     } 

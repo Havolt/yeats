@@ -7,7 +7,7 @@ interface TimeBarProps {
 function TimeBar({ progress }: TimeBarProps) {
     return (
         <div className="time-bar">
-            <progress className="time-bar__progress" value={100 - progress} max={100}></progress>
+            <progress className="time-bar__progress" value={progress} max={100}></progress>
         </div>
     );
 };
