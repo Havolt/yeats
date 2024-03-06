@@ -133,9 +133,7 @@ function SiteMain({}: Props) {
         <h2>Break Time</h2>
       </>
     }
-    <h4>Time Remaining </h4>
-    <TimeBar progress={timeRemaingPercentage()} />
-    <span>{ exerciseTimeRemaining + ` second${exerciseTimeRemaining > 1 ? 's' : ''}` }</span>
+    <TimeBar progress={timeRemaingPercentage()} timeRemaining={exerciseTimeRemaining} />
   </div>
 
 
