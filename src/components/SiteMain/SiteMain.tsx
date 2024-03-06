@@ -125,7 +125,6 @@ function SiteMain({}: Props) {
       <>
         <h2>Current Excercise</h2>
         { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
-        <TimeBar progress={timeRemaingPercentage()} />
         <h3>{currentExercise.text}</h3>
       </>
     } 
@@ -134,7 +133,9 @@ function SiteMain({}: Props) {
         <h2>Break Time</h2>
       </>
     }
-    <h4>Time Remaining: { exerciseTimeRemaining }</h4>
+    <h4>Time Remaining </h4>
+    <TimeBar progress={timeRemaingPercentage()} />
+    <span>{ exerciseTimeRemaining + ` second${exerciseTimeRemaining > 1 ? 's' : ''}` }</span>
   </div>
 
 
