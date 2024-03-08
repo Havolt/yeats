@@ -90,11 +90,13 @@ function SiteMain({}: Props) {
 
       if (exercisesActiveAndIncomplete) {
         const addExtraText = exerciseKey === 'shapes' || exerciseKey === 'threeShapes' || exerciseKey === 'lineTypes'
+        const exerciseListLength = exercisesJson[exerciseKey].length-1
+        const randomExercise = Math.floor(Math.random() * exerciseListLength)
         setShowExerciseDescription(addExtraText)
         setCurrentExercise(() => {
           return {
             key: exerciseKey,
-            text: `${exercisesJson[exerciseKey][0]}`
+            text: `${exercisesJson[exerciseKey][randomExercise]}`
           }
         })
         setExerciseTimeRemaining(exerciseList[exerciseKey].time)
