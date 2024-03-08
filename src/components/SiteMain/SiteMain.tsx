@@ -80,18 +80,25 @@ function SiteMain({}: Props) {
     setExerciseInProgress(true)
   }
 
+  const isExerciseAvailable = (exercise: string) => { 
+    return exerciseList[exercise] &&
+    exerciseList[exercise].active &&
+    !exerciseList[exercise].completed &&
+    +exercisesJson[exercise].length > 0
+  }
+
   const buildCurrentExercise = () => { // Build out the current exercise based on the first one not set as completed
     if(!hasSelectedExercises()) { return }
+
     for(let exerciseKey of Object.keys(exerciseList)) {
-      const exercisesActiveAndIncomplete = exerciseList[exerciseKey] &&
-       exerciseList[exerciseKey].active &&
-       !exerciseList[exerciseKey].completed &&
-       +exercisesJson[exerciseKey].length > 0
+      const exercisesActiveAndIncomplete = isExerciseAvailable(exerciseKey)
 
       if (exercisesActiveAndIncomplete) {
-        const addExtraText = exerciseKey === 'shapes' || exerciseKey === 'threeShapes' || exerciseKey === 'lineTypes'
+        const addExtraText = /^(shapes|threeShapes|lineTypes)$/.test(exerciseKey);
         const exerciseListLength = exercisesJson[exerciseKey].length-1
         const randomExercise = Math.floor(Math.random() * exerciseListLength)
+        
+        // Set all the necessary state for the current exercise 
         setShowExerciseDescription(addExtraText)
         setCurrentExercise(() => {
           return {
