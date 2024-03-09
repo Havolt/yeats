@@ -115,19 +115,13 @@ function SiteMain({}: Props) {
     // This function calculates the remaining time percentage for the current exercise or break.
     const timeRemaingPercentage = () => {
       // If a break is in progress, calculate the percentage of the break time remaining.
-      if(breakInProgress) {
-        return Math.floor(exerciseTimeRemaining / BREAK_TIME_AMOUNT * 100)
-      } 
-      // If an exercise is in progress, calculate the percentage of the exercise time remaining.
-      else if (exerciseList[currentExercise.key]) {
-        return Math.floor((exerciseTimeRemaining / exerciseList[currentExercise.key].time * 100))
-      } 
-      else {
+      if(breakInProgress || exerciseList[currentExercise.key]) {
+        const timeToDivide = breakInProgress ? BREAK_TIME_AMOUNT : exerciseList[currentExercise.key].time
+        return Math.floor(exerciseTimeRemaining / timeToDivide * 100)
+      } else {
         return 0
       }
     }
-
-  
 
   // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
