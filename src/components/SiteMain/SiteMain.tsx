@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import ExerciseList from '../ExerciseList/ExerciseList'
 import TimeBar from '../TimeBar/TimeBar'
 // types
-import { ExerciseGroups, ExerciseJson, CurrentExercise} from '../../types/componentTypes';
+import { ExerciseGroups, ExerciseJson, CurrentExercise} from '../../types/componentTypes'
 // extra
 import EXERCISES from '../../json/exercises.json'
 import './SiteMain.scss'
 
 const exercisesJson: ExerciseJson = EXERCISES.exercises
-const BREAK_TIME_AMOUNT = 30;
+const BREAK_TIME_AMOUNT = 30
 
 type Props = {}
 
@@ -134,10 +134,13 @@ function SiteMain({}: Props) {
     { !breakInProgress && 
       <>
         <h2>Current Excercise</h2>
-        { showExerciseDescription && <h3>Draw as many of the following as possible within the time limit:</h3> }
-        <h3>{currentExercise.text}</h3>
+        { showExerciseDescription && <div className="site-main__description">
+          <h3>Draw as many of the following as possible within the time limit:
+            <span className="site-main__exercise">{`${currentExercise.text}`}</span>
+          </h3>
+        </div> }
       </>
-    } 
+    }
     { breakInProgress && 
       <>
         <h2>Break Time</h2>

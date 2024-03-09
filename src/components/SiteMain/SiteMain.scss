@@ -8,6 +8,20 @@
     ul {
         padding: 0;
     }
+
+    &__description {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__exercise {
+        display: inline-block;
+
+        &:first-letter {
+            text-transform: capitalize;
+            margin-left: .4rem;
+        }
+    }
 }
   
   
