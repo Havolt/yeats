@@ -22,6 +22,7 @@ function SiteMain({}: Props) {
   const [showExerciseDescription, setShowExerciseDescription] = useState(false)
   const [exerciseTimeRemaining, setExerciseTimeRemaining] = useState(-1)
   const [breakInProgress, setBreakInProgress] = useState(false)
+  const [exercisesComplete, setExercisesComplete] = useState(false)
 
   let exerciseTimeTimeout: ReturnType<typeof setTimeout>
 
@@ -107,9 +108,10 @@ function SiteMain({}: Props) {
           }
         })
         setExerciseTimeRemaining(exerciseList[exerciseKey].time)
-        break;
+        return;
       }
     }
+    setExercisesComplete(true)
   };
 
   // This function calculates the remaining time percentage for the current exercise or break.
@@ -128,6 +130,8 @@ function SiteMain({}: Props) {
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
     <button disabled={!hasSelectedExercises ()} onClick={start} type="submit">Start Exercises</button>
   </div>
+
+  const exercisesFinished = <div>Nice work!</div>
 
   // Exercise elements
   const exerciseMain = <div>
@@ -148,7 +152,9 @@ function SiteMain({}: Props) {
 
   return (
     <div className="site-main">
-      {exerciseInProgress ? exerciseMain : exerciseSetup}
+      { (exerciseInProgress && !exercisesComplete) && exerciseMain}
+      { (!exerciseInProgress && !exercisesComplete) && exerciseSetup}
+      { exercisesComplete && exercisesFinished}
     </div>
   )
 }
