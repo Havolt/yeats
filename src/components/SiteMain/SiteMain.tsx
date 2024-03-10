@@ -125,13 +125,22 @@ function SiteMain({}: Props) {
     }
   }
 
+  const goToSetup = () => { 
+    setExerciseInProgress(false)
+    setBreakInProgress(false)
+    setExercisesComplete(false)
+  }
+
   // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
     <button disabled={!hasSelectedExercises ()} onClick={start} type="submit">Start Exercises</button>
   </div>
 
-  const exercisesFinished = <div>Nice work!</div>
+  const exercisesFinished = <div className='site-main__complete'>
+    <span>Nice work!</span>
+    <button onClick={goToSetup}>Click here to start over</button>
+  </div>
 
   // Exercise elements
   const exerciseMain = <div>
