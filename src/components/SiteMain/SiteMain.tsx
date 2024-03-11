@@ -134,7 +134,10 @@ function SiteMain({}: Props) {
   // Initial setup elements
   const exerciseSetup = <div className='site-main__setup'>
     <ExerciseList exerciseGroups={exerciseList} updateActiveExercises={updateActiveExercises} />
-    <button disabled={!hasSelectedExercises ()} onClick={start} type="submit">Start Exercises</button>
+    <div className='site-main__start'>
+      <button disabled={!hasSelectedExercises ()} onClick={start} type="submit">Start Exercises</button>
+      { !hasSelectedExercises() && <span>You need to select at least one exercise to continue</span> }
+    </div>
   </div>
 
   const exercisesFinished = <div className='site-main__complete'>
