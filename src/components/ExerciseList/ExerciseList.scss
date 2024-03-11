@@ -1,8 +1,28 @@
 .exercise-list {
+    width: 30rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 0 1rem #07070733;
+
     li {
         display: flex;
-        width: 20rem;
         justify-content: space-between;
         list-style: none;
+        padding: .5rem 1rem;
+        font-size: 1.6rem;
+
+        &:nth-child(even) {
+            background-color: #303030;
+        }
+
+        &:nth-child(odd) {
+            background-color: #3a3a3a;
+        }
+
+        &:first-child {
+            background-color: rgb(63, 63, 63);
+        }
+
+        
     }
 }
