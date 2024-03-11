@@ -145,16 +145,19 @@ function SiteMain({}: Props) {
     <button onClick={goToSetup}>Click here to start over</button>
   </div>
 
+  const exerciseFullText = showExerciseDescription ? 'Draw as many of the following as possible within the time limit:' : ''
+
   // Exercise elements
   const exerciseMain = <div>
     { !breakInProgress && 
       <>
         <h2>Current Excercise</h2>
-        { showExerciseDescription && <div className="site-main__description">
-          <h3>Draw as many of the following as possible within the time limit:
+        <div className="site-main__description">
+          <h3>
+            { exerciseFullText }
             <span className="site-main__exercise">{`${currentExercise.text}`}</span>
           </h3>
-        </div> }
+        </div>
       </>
     }
     { breakInProgress && <h2>Break Time</h2> }
